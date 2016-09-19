@@ -242,7 +242,7 @@ public class SwiftOverlays: NSObject {
         Removes all *blocking* overlays from application's main window
     */
     public class func removeAllBlockingOverlays() {
-        let window = UIApplication.shared().delegate!.window!!
+        let window = UIApplication.shared.delegate!.window!!
         removeAllOverlaysFromView(window)
     }
     
@@ -300,14 +300,14 @@ public class SwiftOverlays: NSObject {
             
              label.frame = label.frame.offsetBy(dx: accessoryView.frame.size.width + padding * 2, dy: padding)
             
-            accessoryView.frame.offsetInPlace(dx: padding, dy: (actualSize.height - accessoryView.frame.size.height)/2)
+            accessoryView.frame = accessoryView.frame.offsetBy(dx: padding, dy: (actualSize.height - accessoryView.frame.size.height)/2)
         } else {
             actualSize = CGSize(width: max(accessoryView.frame.size.width, label.frame.size.width) + padding * 2,
                 height: label.frame.size.height + accessoryView.frame.size.height + padding * 3)
             
             label.frame = label.frame.offsetBy(dx: padding, dy: accessoryView.frame.size.height + padding * 2)
             
-            accessoryView.frame.offsetInPlace(dx: (actualSize.width - accessoryView.frame.size.width)/2, dy: padding)
+            accessoryView.frame = accessoryView.frame.offsetBy(dx: (actualSize.width - accessoryView.frame.size.width)/2, dy: padding)
         }
         
         // Container view
@@ -412,10 +412,10 @@ public class SwiftOverlays: NSObject {
         if bannerWindow == nil {
             bannerWindow = UIWindow()
             bannerWindow!.windowLevel = UIWindowLevelStatusBar + 1
-            bannerWindow!.backgroundColor = UIColor.clear()
+            bannerWindow!.backgroundColor = UIColor.clear
         }
         
-        bannerWindow!.frame = CGRect(x: 0, y: 0, width: UIScreen.main().bounds.size.width, height: notificationView.frame.size.height)
+        bannerWindow!.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: notificationView.frame.size.height)
         bannerWindow!.isHidden = false
         
         let selector = #selector(closeAnnoyingNotificationOnTopOfStatusBar)
@@ -487,7 +487,7 @@ public class SwiftOverlays: NSObject {
     }
     
     private class func addMainWindowBlocker() -> UIView {
-        let window = UIApplication.shared().delegate!.window!!
+        let window = UIApplication.shared.delegate!.window!!
         
         let blocker = UIView(frame: window.bounds)
         blocker.backgroundColor = backgroundColor
